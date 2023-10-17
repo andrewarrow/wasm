@@ -1,0 +1,42 @@
+<html>  
+    <head>
+        <meta charset="utf-8"/>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="/assets/javascript/wasm_exec.js"></script>
+        <script>
+            const go = new Go();
+            WebAssembly.instantiateStreaming(fetch("/assets/other/json.wasm"), go.importObject).then((result) => {
+                go.run(result.instance);
+            });
+        </script>
+    </head>
+    <body class="h-full">
+      <div class="h-full flex flex-col justify-end">
+          <div id="w" class="overflow-auto p-3 font-bold text-2xl font-mono">
+
+        <div class="p-3 border border-black border border-black flex "><div class="p-3 border border-black "></div><div class="p-3 border border-black  ml-auto"></div></div><div class="p-3 border border-black "></div><div class="p-3 border border-black "></div><div class="p-3 border border-black "></div><div class="p-3 border border-black "></div></div>
+        <div id="end" class="font-mono p-2 invisible block mt-auto bg-black text-white">
+          :
+        </div>
+      </div>
+      <!--
+      <div id="cursor" class="absolute top-0 left-0 bg-white text-black">
+        []
+      </div>
+      -->
+
+      <script>
+        function handleKeyPress(event) {
+          const keyCode = event.keyCode || event.which;
+          const keyValue = event.key;
+
+          //console.log(`Key Code: ${keyCode}, Key Value: ${keyValue}`);
+          key(keyValue);
+        }
+
+        document.addEventListener('keydown', handleKeyPress);
+      </script>
+
+
+    </body>
+</html> 
