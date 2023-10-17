@@ -138,10 +138,22 @@ function setAllLinks() {
   }
 }
 
+function sendFormWithWasm(wasm) {
+  const xhr = new XMLHttpRequest();
+  var route = '/save';
+  xhr.open('POST', route);
+  xhr.responseType = 'json';
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.addEventListener('load', function(event) {
+    console.log("ok");
+  });
+
+  const formDataJson = {content: wasm};
+  const jsonData = JSON.stringify(formDataJson);
+  xhr.send(jsonData);
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
-  setAllLinks();
-  window.onpopstate = function(event) {
-    location.reload();
-  };
 });
 

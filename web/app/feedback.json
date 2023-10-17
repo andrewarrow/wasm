@@ -91,6 +91,15 @@
       ]
     },
     {
+      "name": "wasm",
+      "fields": [
+        {
+          "name": "content",
+          "flavor": "text"
+        }
+      ]
+    },
+    {
       "name": "cookie_token",
       "fields": [
         {
