@@ -11,13 +11,15 @@ type Tag struct {
 	Text     string
 	Children []*Tag
 	Close    bool
+	Class    string
 	//Parent *Tag
 }
 
 var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1}
 
-func NewTag(name string) *Tag {
+func NewTag(index int, tokens []string) *Tag {
 	t := Tag{}
+	name := tokens[index]
 	flavor := validTagMap[name]
 	if flavor > 0 {
 		t.Close = flavor == 2
@@ -34,7 +36,7 @@ func ToHTML(filename string) string {
 	asBytes, _ := ioutil.ReadFile("markup/" + filename)
 	asString := string(asBytes)
 	asLines := strings.Split(asString, "\n")
-	root := NewTag("root")
+	root := NewTag(0, []string{"root"})
 
 	stack := []*Tag{root}
 	var lastSpaces int
@@ -49,16 +51,16 @@ func ToHTML(filename string) string {
 		fmt.Println(spaces)
 		var tag *Tag
 		if spaces == 0 {
-			tag = NewTag(tokens[0])
+			tag = NewTag(0, tokens)
 		} else if spaces == 2 && lastSpaces == 0 {
-			tag = NewTag(tokens[2])
+			tag = NewTag(2, tokens)
 		} else if spaces == 4 && lastSpaces == 2 {
-			tag = NewTag(tokens[4])
+			tag = NewTag(4, tokens)
 		} else if spaces == 4 && lastSpaces == 6 {
 			stack = stack[0 : len(stack)-1]
-			tag = NewTag(tokens[4])
+			tag = NewTag(4, tokens)
 		} else if spaces == 6 && lastSpaces == 4 {
-			tag = NewTag(tokens[6])
+			tag = NewTag(6, tokens)
 		}
 
 		parent := stack[len(stack)-1]
