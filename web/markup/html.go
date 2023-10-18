@@ -17,10 +17,26 @@ type Tag struct {
 
 var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1}
 
+func makeClassAndAttrMap(tokens []string) map[string]string {
+	m := map[string]string{}
+
+	class := ""
+	for _, item := range tokens {
+		if strings.Contains(item, "=") {
+		} else {
+			class += item + " "
+		}
+	}
+	m["class"] = class
+
+	return m
+}
+
 func NewTag(index int, tokens []string) *Tag {
 	t := Tag{}
 	name := tokens[index]
-	t.Class = strings.Join(tokens[index+1:len(tokens)], " ")
+	classAndAttrMap := makeClassAndAttrMap(tokens[index+1 : len(tokens)])
+	t.Class = classAndAttrMap["class"]
 	flavor := validTagMap[name]
 	if flavor > 0 {
 		t.Close = flavor == 2
