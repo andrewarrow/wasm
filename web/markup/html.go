@@ -20,6 +20,7 @@ var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1}
 func NewTag(index int, tokens []string) *Tag {
 	t := Tag{}
 	name := tokens[index]
+	t.Class = strings.Join(tokens[index+1:len(tokens)], " ")
 	flavor := validTagMap[name]
 	if flavor > 0 {
 		t.Close = flavor == 2
@@ -58,6 +59,7 @@ func ToHTML(filename string) string {
 			tag = NewTag(4, tokens)
 		} else if spaces == 4 && lastSpaces == 6 {
 			stack = stack[0 : len(stack)-1]
+			stack = stack[0 : len(stack)-1]
 			tag = NewTag(4, tokens)
 		} else if spaces == 6 && lastSpaces == 4 {
 			tag = NewTag(6, tokens)
@@ -70,6 +72,7 @@ func ToHTML(filename string) string {
 	}
 
 	final := renderHTML(root)
+	fmt.Println(final)
 	return final
 }
 
@@ -78,6 +81,7 @@ func renderHTML(tag *Tag) string {
 
 	if tag.Name != "root" && tag.Name != "" {
 		html += "<" + tag.Name
+		html += fmt.Sprintf(` class="%s" `, tag.Class)
 		if tag.Close == false {
 			html += "/>"
 		} else {
