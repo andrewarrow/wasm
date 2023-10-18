@@ -11,11 +11,22 @@ type Tag struct {
 	Text     string
 	Children []*Tag
 	Close    bool
-	Class    string
+	//Class    string
+	Attr map[string]string
 	//Parent *Tag
 }
 
 var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1}
+
+func (t *Tag) MakeAttr() string {
+	buffer := ""
+
+	for key, value := range t.Attr {
+		buffer += fmt.Sprintf(`%s="%s" `, key, value)
+	}
+
+	return buffer
+}
 
 func fixValueForTag(name, key, value string) string {
 	if name == "img" && key == "src" {
@@ -53,8 +64,8 @@ func makeClassAndAttrMap(name string, tokens []string) map[string]string {
 func NewTag(index int, tokens []string) *Tag {
 	t := Tag{}
 	name := tokens[index]
-	classAndAttrMap := makeClassAndAttrMap(name, tokens[index+1:len(tokens)])
-	t.Class = classAndAttrMap["class"]
+	t.Attr = makeClassAndAttrMap(name, tokens[index+1:len(tokens)])
+	//t.Class = classAndAttrMap["class"]
 	flavor := validTagMap[name]
 	if flavor > 0 {
 		t.Close = flavor == 2
@@ -115,7 +126,7 @@ func renderHTML(tag *Tag) string {
 
 	if tag.Name != "root" && tag.Name != "" {
 		html += "<" + tag.Name
-		html += fmt.Sprintf(` class="%s" `, tag.Class)
+		html += fmt.Sprintf(` %s `, tag.MakeAttr())
 		if tag.Close == false {
 			html += "/>"
 		} else {
