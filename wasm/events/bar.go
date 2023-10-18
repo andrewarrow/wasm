@@ -2,13 +2,15 @@ package events
 
 import "syscall/js"
 
+//import "fmt"
+
 type CommandBar struct {
 	Div js.Value
 }
 
 func (cb *CommandBar) Hide() {
 	addClass(cb.Div, "invisible")
-	cb.Div.Set("innerText", ": ")
+	cb.Div.Set("innerText", ":")
 }
 
 func (cb *CommandBar) Show() {
@@ -32,6 +34,10 @@ func (cb *CommandBar) HandleKey(k string) {
 		Focus = "div"
 		cb.Hide()
 	} else if k == "Backspace" {
+		text := cb.Div.Get("innerText").String()
+		if len(text) == 1 {
+			return
+		}
 		cb.RemoveLast()
 	} else if k == "Enter" {
 		//text := cb.Div.Get("innerText").String()
