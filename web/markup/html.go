@@ -13,9 +13,26 @@ func ToHTML(filename string) string {
 	asString := string(asBytes)
 	asLines := strings.Split(asString, "\n")
 	for _, line := range asLines {
+		tokens := strings.Split(line, " ")
+		spaces := countSpaces(tokens)
+		if spaces == 0 {
+			tag := tokens[0]
+			fmt.Println(tag)
+		}
 		buffer = append(buffer, `<div>hi2</div>`)
-		fmt.Println(line)
 	}
 
 	return strings.Join(buffer, "\n")
+}
+
+func countSpaces(tokens []string) int {
+	count := 0
+	for _, item := range tokens {
+		if item == "" {
+			count++
+		} else {
+			break
+		}
+	}
+	return count
 }
