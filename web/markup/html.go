@@ -8,13 +8,20 @@ import (
 
 type Tag struct {
 	Name     string
+	Text     string
 	Children []*Tag
 	//Parent *Tag
 }
 
+var validTagMap = map[string]bool{"div": true, "img": true, "root": true}
+
 func NewTag(name string) *Tag {
 	t := Tag{}
-	t.Name = name
+	if validTagMap[name] {
+		t.Name = name
+	} else {
+		t.Text = name
+	}
 	t.Children = []*Tag{}
 	//t.Parent = parent
 	return &t
@@ -68,7 +75,7 @@ func ToHTML(filename string) string {
 func renderHTML(tag *Tag) string {
 	html := ""
 
-	if tag.Name != "root" {
+	if tag.Name != "root" && tag.Name != "" {
 		html += "<" + tag.Name
 		html += ">"
 	}
@@ -77,8 +84,12 @@ func renderHTML(tag *Tag) string {
 		html += renderHTML(child)
 	}
 
-	if tag.Name != "root" {
+	if tag.Name != "root" && tag.Name != "" {
 		html += "</" + tag.Name + ">"
+	}
+
+	if tag.Text != "" {
+		html += tag.Text
 	}
 
 	return html
