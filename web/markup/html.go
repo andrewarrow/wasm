@@ -33,6 +33,9 @@ func ToHTML(filename string) string {
 
 	for _, line := range asLines {
 		tokens := strings.Split(line, " ")
+		if len(tokens) == 1 {
+			continue
+		}
 
 		spaces := countSpaces(tokens)
 		fmt.Println(spaces)
@@ -56,8 +59,18 @@ func ToHTML(filename string) string {
 		lastSpaces = spaces
 	}
 
+	renderHTML(root)
 	buffer = append(buffer, `<div>hi2</div>`)
 	return strings.Join(buffer, "\n")
+}
+
+func renderHTML(tag *Tag) string {
+	for _, child := range tag.Children {
+		fmt.Println(child.Name)
+		renderHTML(child)
+	}
+
+	return ""
 }
 
 func countSpaces(tokens []string) int {
