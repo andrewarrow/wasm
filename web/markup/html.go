@@ -17,12 +17,30 @@ type Tag struct {
 
 var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1}
 
-func makeClassAndAttrMap(tokens []string) map[string]string {
+func fixValueForTag(name, key, value string) string {
+	if name == "img" && key == "src" {
+		value = fmt.Sprintf("/assets/images/%s", value)
+	}
+	return value
+}
+
+func getKeyValue(s string) (string, string) {
+	tokens := strings.Split(s, "=")
+	if len(tokens) == 2 {
+		return tokens[0], tokens[1]
+	}
+	return "", ""
+}
+
+func makeClassAndAttrMap(name string, tokens []string) map[string]string {
 	m := map[string]string{}
 
 	class := ""
 	for _, item := range tokens {
 		if strings.Contains(item, "=") {
+			key, value := getKeyValue(item)
+			value = fixValueForTag(name, key, value)
+			m[key] = value
 		} else {
 			class += item + " "
 		}
@@ -35,7 +53,7 @@ func makeClassAndAttrMap(tokens []string) map[string]string {
 func NewTag(index int, tokens []string) *Tag {
 	t := Tag{}
 	name := tokens[index]
-	classAndAttrMap := makeClassAndAttrMap(tokens[index+1 : len(tokens)])
+	classAndAttrMap := makeClassAndAttrMap(name, tokens[index+1:len(tokens)])
 	t.Class = classAndAttrMap["class"]
 	flavor := validTagMap[name]
 	if flavor > 0 {
