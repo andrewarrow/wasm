@@ -1,6 +1,8 @@
 package app
 
 import (
+	"html/template"
+
 	"github.com/andrewarrow/feedback/router"
 )
 
@@ -29,7 +31,9 @@ func HandleWelcome(c *router.Context, second, third string) {
 
 func handleWelcomeIndex(c *router.Context) {
 	//list := c.All("welcome", "where user_id=$1 order by created_at desc", "", c.User["id"])
+	one := c.One("wasm", "order by created_at desc")
 
 	send := map[string]any{}
+	send["content"] = template.HTML(one["content"].(string))
 	c.SendContentInLayout("welcome.html", send, 200)
 }
