@@ -1,16 +1,13 @@
 package app
 
 import (
+	"html/template"
+	"wasm/markup"
+
 	"github.com/andrewarrow/feedback/router"
 )
 
-
-
-
 func HandleMarkup(c *router.Context, second, third string) {
-	if router.NotLoggedIn(c) {
-		return
-	}
 	if second == "" && third == "" && c.Method == "GET" {
 		handleMarkupIndex(c)
 		return
@@ -27,6 +24,9 @@ func HandleMarkup(c *router.Context, second, third string) {
 		handleMarkupShowPost(c, second)
 		return
 	}
+	if router.NotLoggedIn(c) {
+		return
+	}
 	c.NotFound = true
 }
 
@@ -34,5 +34,7 @@ func handleMarkupIndex(c *router.Context) {
 	//list := c.All("markup", "where user_id=$1 order by created_at desc", "", c.User["id"])
 
 	send := map[string]any{}
-	c.SendContentInLayout(".html", send, 200)
+	//send["content"] = template.HTML(`<div class="p-3 border border-black"> </div>`)
+	send["content"] = template.HTML(markup.ToHTML("index.mu"))
+	c.SendContentInLayout("markup.html", send, 200)
 }
