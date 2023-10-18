@@ -31,8 +31,6 @@ func NewTag(name string) *Tag {
 }
 
 func ToHTML(filename string) string {
-	buffer := []string{}
-
 	asBytes, _ := ioutil.ReadFile("markup/" + filename)
 	asString := string(asBytes)
 	asLines := strings.Split(asString, "\n")
@@ -70,9 +68,7 @@ func ToHTML(filename string) string {
 	}
 
 	final := renderHTML(root)
-	fmt.Println(final)
-	buffer = append(buffer, `<div>hi2</div>`)
-	return strings.Join(buffer, "\n")
+	return final
 }
 
 func renderHTML(tag *Tag) string {
@@ -85,6 +81,7 @@ func renderHTML(tag *Tag) string {
 		} else {
 			html += ">"
 		}
+		html += "\n"
 	}
 
 	for _, child := range tag.Children {
@@ -93,10 +90,12 @@ func renderHTML(tag *Tag) string {
 
 	if tag.Name != "root" && tag.Name != "" && tag.Close {
 		html += "</" + tag.Name + ">"
+		html += "\n"
 	}
 
 	if tag.Text != "" {
 		html += tag.Text
+		html += "\n"
 	}
 
 	return html

@@ -1,6 +1,6 @@
-div class=p-3 
-  div class=flex
-    div
+div [p-3] 
+  div [flex bg-red-600]
+    div []
       img src=logo.png
-    div class=ml-auto
+    div [ml-auto]
       test
