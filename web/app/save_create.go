@@ -11,7 +11,6 @@ func handleSaveCreate(c *router.Context) {
 
 	returnPath := "/"
 
-	c.Params = map[string]any{}
 	message := c.Insert("wasm")
 	if message != "" {
 		router.SetFlash(c, message)

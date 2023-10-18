@@ -67,6 +67,7 @@ func (e *Editor) HandleDivKey(k string) {
 	} else if k == "s" && e.InsertMode == false {
 		content := e.Div.Get("innerHTML")
 		fmt.Println(content)
+		js.Global().Call("sendFormWithWasm", content)
 	} else if k == "ArrowRight" && e.InsertMode == false {
 		//e.Cursor.SetLocation("right")
 	} else if k == "ArrowLeft" && e.InsertMode == false {
