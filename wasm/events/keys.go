@@ -41,9 +41,9 @@ func (e *Editor) HandleDivInsert(k string) {
 		return
 	}
 	fmt.Println(k)
-	text := e.Div.Get("innerText")
+	text := e.Selected.Get("innerText")
 	if k == "Backspace" {
-		e.Div.Set("innerText", text[0:len(text)-1])
+		e.Selected.Set("innerText", text[0:len(text)-1])
 		return
 	}
 	if e.Space {
@@ -53,7 +53,7 @@ func (e *Editor) HandleDivInsert(k string) {
 	if k == " " {
 		e.Space = true
 	}
-	e.Div.Set("innerText", text+k)
+	e.Selected.Set("innerText", text+k)
 }
 
 func (e *Editor) HandleDivKey(k string) {
@@ -117,6 +117,9 @@ func (e *Editor) HandleDivKey(k string) {
 				addClass(e.Selected.Div, "bg-pink-600")
 			}
 		} else {
+			if e.Selected.Index >= len(e.Selected.Children) {
+				e.Selected.Index = 0
+			}
 			e.Selected = e.Selected.Children[e.Selected.Index]
 			addClass(e.Selected.Div, "bg-pink-600")
 		}
