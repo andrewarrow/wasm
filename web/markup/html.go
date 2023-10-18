@@ -10,14 +10,17 @@ type Tag struct {
 	Name     string
 	Text     string
 	Children []*Tag
+	Close    bool
 	//Parent *Tag
 }
 
-var validTagMap = map[string]bool{"div": true, "img": true, "root": true}
+var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1}
 
 func NewTag(name string) *Tag {
 	t := Tag{}
-	if validTagMap[name] {
+	flavor := validTagMap[name]
+	if flavor > 0 {
+		t.Close = flavor == 2
 		t.Name = name
 	} else {
 		t.Text = name
@@ -77,14 +80,18 @@ func renderHTML(tag *Tag) string {
 
 	if tag.Name != "root" && tag.Name != "" {
 		html += "<" + tag.Name
-		html += ">"
+		if tag.Close == false {
+			html += "/>"
+		} else {
+			html += ">"
+		}
 	}
 
 	for _, child := range tag.Children {
 		html += renderHTML(child)
 	}
 
-	if tag.Name != "root" && tag.Name != "" {
+	if tag.Name != "root" && tag.Name != "" && tag.Close {
 		html += "</" + tag.Name + ">"
 	}
 
