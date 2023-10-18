@@ -152,6 +152,6 @@ func (e *Editor) HandleKey(k string) {
 	if Focus == "div" {
 		e.HandleDivKey(k)
 	} else if Focus == "bar" {
-		e.End.HandleKey(k)
+		e.End.HandleKey(k, e.Selected)
 	}
 }

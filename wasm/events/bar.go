@@ -27,7 +27,7 @@ func (cb *CommandBar) RemoveLast() {
 	cb.Div.Set("innerText", text[0:len(text)-1])
 }
 
-func (cb *CommandBar) HandleKey(k string) {
+func (cb *CommandBar) HandleKey(k string, div *Div) {
 	//fmt.Println("ecb HandleKey")
 	if k == "i" {
 	} else if k == "Escape" {
@@ -40,7 +40,9 @@ func (cb *CommandBar) HandleKey(k string) {
 		}
 		cb.RemoveLast()
 	} else if k == "Enter" {
-		//text := cb.Div.Get("innerText").String()
+		text := cb.Div.Get("innerText").String()
+		barText := text[1:len(text)]
+		addClass(div.Div, barText)
 		Focus = "div"
 		cb.Hide()
 	} else {
