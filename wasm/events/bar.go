@@ -34,6 +34,7 @@ func (cb *CommandBar) HandleKey(k string) {
 	} else if k == "Backspace" {
 		cb.RemoveLast()
 	} else if k == "Enter" {
+		//text := cb.Div.Get("innerText").String()
 		Focus = "div"
 		cb.Hide()
 	} else {

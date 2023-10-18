@@ -11,12 +11,11 @@
             });
         </script>
     </head>
-    <body class="h-full">
-      <div class="h-full flex flex-col justify-end">
-          <div id="w" class="overflow-auto p-3 font-bold text-2xl font-mono">
-
+    <body class="h-full min-h-full">
+      <div class="h-full min-h-full flex flex-col justify-end">
+          <div id="w" class=" p-3 font-bold text-2xl font-mono">
             {{ index . "content" }}
-
+          </div>
         <div id="end" class="font-mono p-2 invisible block mt-auto bg-black text-white">
           :
         </div>

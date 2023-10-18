@@ -65,7 +65,9 @@ func (e *Editor) HandleDivKey(k string) {
 	if k == "i" && e.InsertMode == false {
 		e.InsertMode = true
 	} else if k == "s" && e.InsertMode == false {
+		removeClass(e.Selected.Div, "bg-pink-600")
 		content := e.Div.Get("innerHTML")
+		addClass(e.Selected.Div, "bg-pink-600")
 		fmt.Println(content)
 		js.Global().Call("sendFormWithWasm", content)
 	} else if k == "ArrowRight" && e.InsertMode == false {

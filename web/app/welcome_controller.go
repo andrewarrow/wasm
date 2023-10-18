@@ -34,6 +34,9 @@ func handleWelcomeIndex(c *router.Context) {
 	one := c.One("wasm", "order by created_at desc")
 
 	send := map[string]any{}
-	send["content"] = template.HTML(one["content"].(string))
+	send["content"] = template.HTML(`<div class="p-3 border border-black"> </div>`)
+	if len(one) > 0 {
+		send["content"] = template.HTML(one["content"].(string))
+	}
 	c.SendContentInLayout("welcome.html", send, 200)
 }
