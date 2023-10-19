@@ -10,9 +10,7 @@ type Tag struct {
 	Text     string
 	Children []*Tag
 	Close    bool
-	//Class    string
-	Attr map[string]string
-	//Parent *Tag
+	Attr     map[string]string
 }
 
 var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1, "a": 2}
@@ -29,7 +27,7 @@ func NewTag(index int, tokens []string) *Tag {
 		t.Close = flavor == 2
 		t.Name = name
 	} else {
-		t.Text = name
+		t.Text = strings.Join(tokens, " ")
 	}
 	t.Children = []*Tag{}
 	//t.Parent = parent
