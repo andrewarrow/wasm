@@ -95,7 +95,7 @@ func ToHTML(filename string) string {
 
 		spaces := countSpaces(tokens)
 		delta := spaces - lastSpaces
-		fmt.Println(delta, line)
+		//fmt.Println(delta, line)
 		if delta < 0 {
 			delta = delta * -1
 			delta = delta / 2
@@ -103,7 +103,7 @@ func ToHTML(filename string) string {
 			if delta > 2 {
 				offset = (delta * 2) - 2
 			}
-			fmt.Println("f", delta, offset, line)
+			//fmt.Println("f", delta, offset, line)
 			stack = stack[0 : len(stack)-(offset)]
 		}
 

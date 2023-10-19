@@ -7,7 +7,13 @@ div p-3
         Login
   div flex
     div w-1/3
-      test
+      div flex space-x-2
+        div
+          1
+        div
+          2
+        div
+          3
     div w-1/3
       test
     div w-1/3
