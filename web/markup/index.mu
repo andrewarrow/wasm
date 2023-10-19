@@ -1,19 +1,19 @@
-div p-3 
-  div flex
+div bg-red-600 
+  div flex items-center
     div
       img src=logo.png
-    div ml-auto
+    div ml-auto mr-3
       a underline href=/something
         Login
   div flex
     div w-1/3
-      div flex space-x-2
+      div p-3 
         div
-          1
+          Title
         div
-          2
+          Some nice long text
         div
-          3
+          3 days ago
     div w-1/3
       test
     div w-1/3
