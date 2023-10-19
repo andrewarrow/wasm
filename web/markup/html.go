@@ -16,7 +16,7 @@ type Tag struct {
 	//Parent *Tag
 }
 
-var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1}
+var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1, "a": 2}
 
 func (t *Tag) MakeAttr() string {
 	buffer := ""
@@ -95,8 +95,16 @@ func ToHTML(filename string) string {
 
 		spaces := countSpaces(tokens)
 		delta := spaces - lastSpaces
+		fmt.Println(delta, line)
 		if delta < 0 {
-			stack = stack[0 : len(stack)-2]
+			delta = delta * -1
+			delta = delta / 2
+			offset := 2
+			if delta > 2 {
+				offset = (delta * 2) - 2
+			}
+			fmt.Println("f", delta, offset, line)
+			stack = stack[0 : len(stack)-(offset)]
 		}
 
 		tag := NewTag(spaces, tokens)
