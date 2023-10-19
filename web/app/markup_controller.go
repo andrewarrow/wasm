@@ -35,6 +35,7 @@ func handleMarkupIndex(c *router.Context) {
 
 	send := map[string]any{}
 	//send["content"] = template.HTML(`<div class="p-3 border border-black"> </div>`)
-	send["content"] = template.HTML(markup.ToHTML("index.mu"))
+	send["top"] = markup.ToHTML(send, "top.mu")
+	send["content"] = template.HTML(markup.ToHTML(send, "index.mu"))
 	c.SendContentInLayout("markup.html", send, 200)
 }

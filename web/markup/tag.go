@@ -27,7 +27,7 @@ func NewTag(index int, tokens []string) *Tag {
 		t.Close = flavor == 2
 		t.Name = name
 	} else {
-		t.Text = strings.Join(tokens, " ")
+		t.Text = strings.Join(tokens[index:len(tokens)], " ")
 	}
 	t.Children = []*Tag{}
 	//t.Parent = parent

@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func ToHTML(filename string) string {
+func ToHTML(m map[string]any, filename string) string {
 	asBytes, _ := ioutil.ReadFile("markup/" + filename)
 	asString := string(asBytes)
 	asLines := strings.Split(asString, "\n")
@@ -43,12 +43,12 @@ func ToHTML(filename string) string {
 		lastSpaces = spaces
 	}
 
-	final := renderHTML(root)
+	final := renderHTML(m, root)
 	fmt.Println(final)
 	return final
 }
 
-func renderHTML(tag *Tag) string {
+func renderHTML(m map[string]any, tag *Tag) string {
 	html := ""
 
 	if tag.Name != "root" && tag.Name != "" {
@@ -63,7 +63,7 @@ func renderHTML(tag *Tag) string {
 	}
 
 	for _, child := range tag.Children {
-		html += renderHTML(child)
+		html += renderHTML(m, child)
 	}
 
 	if tag.Name != "root" && tag.Name != "" && tag.Close {
@@ -72,8 +72,13 @@ func renderHTML(tag *Tag) string {
 	}
 
 	if tag.Text != "" {
-		html += tag.Text
-		html += "\n"
+		if strings.HasPrefix(tag.Text, "#") {
+			key := tag.Text[1:len(tag.Text)]
+			html += m[key].(string)
+		} else {
+			html += tag.Text
+			html += "\n"
+		}
 	}
 
 	return html
