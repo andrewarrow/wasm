@@ -94,25 +94,16 @@ func ToHTML(filename string) string {
 		}
 
 		spaces := countSpaces(tokens)
-		fmt.Println(spaces)
-		var tag *Tag
-		if spaces == 0 {
-			tag = NewTag(0, tokens)
-		} else if spaces == 2 && lastSpaces == 0 {
-			tag = NewTag(2, tokens)
-		} else if spaces == 4 && lastSpaces == 2 {
-			tag = NewTag(4, tokens)
-		} else if spaces == 4 && lastSpaces == 6 {
-			stack = stack[0 : len(stack)-1]
-			stack = stack[0 : len(stack)-1]
-			tag = NewTag(4, tokens)
-		} else if spaces == 6 && lastSpaces == 4 {
-			tag = NewTag(6, tokens)
+		delta := spaces - lastSpaces
+		if delta < 0 {
+			stack = stack[0 : len(stack)-2]
 		}
 
+		tag := NewTag(spaces, tokens)
 		parent := stack[len(stack)-1]
 		parent.Children = append(parent.Children, tag)
 		stack = append(stack, tag)
+
 		lastSpaces = spaces
 	}
 
