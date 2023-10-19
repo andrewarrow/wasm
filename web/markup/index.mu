@@ -6,7 +6,7 @@ div
       a underline href=/something
         Login
   div flex
-    div w-1/3
+    div bg-r
       div p-3 
         div font-bold
           Title
@@ -14,7 +14,7 @@ div
           Some nice long text Transmitting the capacitor won't do anything, we need to transmit the open-source XSS matrix!
         div text-gray-400
           3 days ago
-    div w-1/3
+    div bg-r
       test
-    div w-1/3
+    div bg-r
       test
