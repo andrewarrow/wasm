@@ -34,6 +34,9 @@ func ToHTML(m map[string]any, filename string) string {
 			//fmt.Println("f", delta, offset, line)
 			stack = stack[0 : len(stack)-(offset)]
 		}
+		if spaces == 0 {
+			stack = []*Tag{root}
+		}
 
 		tag := NewTag(spaces, tokens)
 		parent := stack[len(stack)-1]
