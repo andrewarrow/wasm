@@ -7,11 +7,21 @@ div bg-black text-white
         Sign In
       a href=/something
         Get Started
-  div w-full text-center text-6xl pt-20 pb-20
+  div w-full text-center text-6xl pt-20 pb-64
     div w-1/2 mx-auto
       span
         Let AI-GPT check your
       span text-blue-600 font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-300 to-red-500
         facts.
-    div mx-auto mt-9 text-sm text-gray-400
+    div mx-auto mt-9 text-lg text-gray-400
       Consistent with an evidence-based understanding of physical reality. 
+    div
+      more
+    div
+      more
+    div
+      more
+    div
+      more
+    div
+      more
