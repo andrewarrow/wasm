@@ -7,6 +7,10 @@ div bg-black text-white
         Sign In
       a href=/something
         Get Started
-  div w-full text-center text-4xl pt-20 pb-20
+  div w-full text-center text-6xl pt-20 pb-20
     div w-1/2 mx-auto
-      The AI platform that checks your facts based on what we can actually know.
+      Let AI-GPT check your
+    span text-blue-600
+      facts.
+    div w-1/2 mx-auto mt-9 text-sm text-gray-400
+      Consistent with an evidence-based understanding of physical reality. 

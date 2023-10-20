@@ -13,7 +13,8 @@ type Tag struct {
 	Attr     map[string]string
 }
 
-var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1, "a": 2}
+var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1, "a": 2,
+	"span": 2}
 
 func NewTag(index int, tokens []string) *Tag {
 	t := Tag{}
