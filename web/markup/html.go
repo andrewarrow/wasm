@@ -54,7 +54,7 @@ func ToHTML(m map[string]any, filename string) string {
 	return final
 }
 
-func renderHTML(m map[string]any, tag *Tag, tabs string) string {
+func renderHTML2(m map[string]any, tag *Tag, tabs string) string {
 	if tag.Name != "root" && tag.Name != "" {
 		fmt.Println(tabs + tag.Name)
 	}
@@ -74,26 +74,27 @@ func renderHTML(m map[string]any, tag *Tag, tabs string) string {
 	return ""
 }
 
-func renderHTML2(m map[string]any, tag *Tag) string {
+func renderHTML(m map[string]any, tag *Tag, tabs string) string {
 	html := ""
 
 	if tag.Name != "root" && tag.Name != "" {
-		html += "<" + tag.Name
+		html += fmt.Sprintf("%s<%s", tabs, tag.Name)
+		//html += tabs + "<" + tag.Name
 		html += fmt.Sprintf(` %s `, tag.MakeAttr())
 		if tag.Close == false {
 			html += "/>"
 		} else {
-			html = strings.TrimSpace(html) + ">"
+			html = strings.TrimRight(html, " ") + ">"
 		}
 		html += "\n"
 	}
 
 	for _, child := range tag.Children {
-		html += renderHTML(m, child, "")
+		html += renderHTML(m, child, tabs+"  ")
 	}
 
 	if tag.Name != "root" && tag.Name != "" && tag.Close {
-		html += "</" + tag.Name + ">"
+		html += tabs + "</" + tag.Name + ">"
 		html += "\n"
 	}
 
@@ -102,7 +103,7 @@ func renderHTML2(m map[string]any, tag *Tag) string {
 			key := tag.Text[1:len(tag.Text)]
 			html += m[key].(string)
 		} else {
-			html += tag.Text
+			html += tabs + tag.Text
 			html += "\n"
 		}
 	}
