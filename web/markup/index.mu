@@ -15,10 +15,10 @@ div bg-black text-white
         facts.
       div mt-9 text-lg text-gray-400
         Consistent with an evidence-based understanding of physical reality. 
-      div mt-9 space-x-6 text-lg 
-        a border border-rose-300 border-2 px-9 py-3 rounded-full href=/something
-          Sign In
-        a href=/something
-          Get Started
+    div mt-9 space-x-6 text-lg 
+      a border border-rose-300 border-2 px-9 py-3 rounded-full href=/something
+        Sign In
+      a href=/something
+        Get Started
   div text-lg text-gray-400 ml-9 pb-9
     &copy 2023 align42.ai

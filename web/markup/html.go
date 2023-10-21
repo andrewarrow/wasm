@@ -37,6 +37,9 @@ func ToHTML(m map[string]any, filename string) string {
 		if spaces == 0 {
 			stack = []*Tag{root}
 		}
+		if spaces == 4 && len(stack) == 4 {
+			stack = stack[0:3]
+		}
 
 		tag := NewTag(spaces, tokens)
 		parent := stack[len(stack)-1]
