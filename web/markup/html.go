@@ -60,7 +60,7 @@ func renderHTML(m map[string]any, tag *Tag) string {
 		if tag.Close == false {
 			html += "/>"
 		} else {
-			html += ">"
+			html = strings.TrimSpace(html) + ">"
 		}
 		html += "\n"
 	}
