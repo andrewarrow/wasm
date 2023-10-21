@@ -46,12 +46,32 @@ func ToHTML(m map[string]any, filename string) string {
 		lastSpaces = spaces
 	}
 
-	final := renderHTML(m, root)
+	final := renderHTML(m, root, "")
 	fmt.Println(final)
 	return final
 }
 
-func renderHTML(m map[string]any, tag *Tag) string {
+func renderHTML(m map[string]any, tag *Tag, tabs string) string {
+	if tag.Name != "root" && tag.Name != "" {
+		fmt.Println(tabs + tag.Name)
+	}
+
+	for _, child := range tag.Children {
+		renderHTML(m, child, tabs+"  ")
+	}
+
+	if tag.Name != "root" && tag.Name != "" && tag.Close {
+		fmt.Println(tabs + "/" + tag.Name)
+	}
+
+	if tag.Text != "" {
+		fmt.Println(tabs + "/" + tag.Text)
+	}
+
+	return ""
+}
+
+func renderHTML2(m map[string]any, tag *Tag) string {
 	html := ""
 
 	if tag.Name != "root" && tag.Name != "" {
@@ -66,7 +86,7 @@ func renderHTML(m map[string]any, tag *Tag) string {
 	}
 
 	for _, child := range tag.Children {
-		html += renderHTML(m, child)
+		html += renderHTML(m, child, "")
 	}
 
 	if tag.Name != "root" && tag.Name != "" && tag.Close {
