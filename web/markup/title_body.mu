@@ -1,5 +1,5 @@
 div w-full flex items-center py-6 pl-9
-  div w-1/2 text-gray-400 border border-gray-600 rounded
+  div w-full md:w-1/2 text-gray-400 border border-gray-600 rounded
     form 
       div
         input focus:outline-none name=title placeholder=Title py-2 px-3 bg-black
