@@ -15,19 +15,9 @@
         </script>
     </head>
     <body class="h-full min-h-full bg-black">
-      <div class="h-full min-h-full flex flex-col justify-end">
-          <div id="w" class="overflow-auto" style="font-family: inter;">
-            {{ index . "content" }}
-          </div>
-        <div id="end" class="font-mono p-2 invisible block mt-auto bg-black text-white">
-          :
-        </div>
+      <div id="w" class="overflow-y-auto" style="font-family: inter;">
+         {{ index . "content" }}
       </div>
-      <!--
-      <div id="cursor" class="absolute top-0 left-0 bg-white text-black">
-        []
-      </div>
-      -->
 
       <script>
         function handleKeyPress(event) {
