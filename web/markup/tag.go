@@ -14,7 +14,7 @@ type Tag struct {
 }
 
 var validTagMap = map[string]int{"div": 2, "img": 3, "root": 1, "a": 2,
-	"span": 2}
+	"span": 2, "form": 2, "input": 3, "textarea": 2}
 
 func NewTag(index int, tokens []string) *Tag {
 	t := Tag{}
