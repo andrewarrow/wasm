@@ -4,7 +4,7 @@ import "syscall/js"
 import "html/template"
 import "bytes"
 import "embed"
-
+import "wasm/network"
 import "fmt"
 
 var EmbeddedTemplates embed.FS
@@ -39,9 +39,15 @@ func (e *State) Click(this js.Value, p []js.Value) any {
 	} else if id == "cancel" {
 		addClass(modal, "translate-x-full")
 		addClass(modal, "opacity-0")
+	} else if id == "save" {
+		go network.Save()
+		addClass(modal, "translate-x-full")
+		addClass(modal, "opacity-0")
 	}
-	cancel := js.Global().Get("document").Call("getElementById", "cancel")
+	cancel := dollar("cancel")
 	cancel.Set("onclick", js.FuncOf(e.Click))
+	save := dollar("save")
+	save.Set("onclick", js.FuncOf(e.Click))
 	return js.Undefined()
 }
 
