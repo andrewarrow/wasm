@@ -17,9 +17,21 @@ func NewState() *State {
 	return &s
 }
 
+func dollar(name string) js.Value {
+	return js.Global().Get("document").Call("getElementById", name)
+}
+
 func (e *State) Click(this js.Value, p []js.Value) any {
 	id := this.Get("id").String()
 	fmt.Println(id)
+
+	if id == "b1" {
+		modal := dollar("modal")
+		removeClass(modal, "translate-x-full")
+		removeClass(modal, "opacity-0")
+		modal.Set("scrollTop", 0)
+	} else if id == "b2" {
+	}
 	return js.Undefined()
 }
 

@@ -7,5 +7,5 @@ div p-3 text-white flex
         this is button2
     div bg-green-900 p-3 id=list
       {{ template "list" . }}
-div opacity-0 bg-white transform translate-x-full transition-transform transition-opacity border-black border-2 fixed top-0 right-0 overflow-y-auto h-full id=form1
-  {{ template "_form" . }}
+  div opacity-0 bg-white transform translate-x-full transition-transform transition-opacity border-black border-2 fixed top-0 right-0 overflow-y-auto h-full id=modal
+    {{ template "form" . }}
