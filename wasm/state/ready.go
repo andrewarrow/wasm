@@ -36,7 +36,12 @@ func (e *State) Click(this js.Value, p []js.Value) any {
 		removeClass(modal, "opacity-0")
 		modal.Set("scrollTop", 0)
 		modal.Set("innerHTML", runTemplate("other_form"))
+	} else if id == "cancel" {
+		addClass(modal, "translate-x-full")
+		addClass(modal, "opacity-0")
 	}
+	cancel := js.Global().Get("document").Call("getElementById", "cancel")
+	cancel.Set("onclick", js.FuncOf(e.Click))
 	return js.Undefined()
 }
 
