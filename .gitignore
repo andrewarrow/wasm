@@ -2,7 +2,7 @@ go.sum
 node_modules
 package-lock.json
 package.json
-assets/css/tail.min.css
+tail.min.css
 .DS_Store
 json.wasm
 *.html
