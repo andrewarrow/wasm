@@ -39,13 +39,16 @@ func DoHttpRead(client *http.Client, request *http.Request) (string, int) {
 }
 
 func GetTo(full, bearer string) (string, int) {
+	fmt.Println("here")
 	request, err := http.NewRequest("GET", full, nil)
 	if err != nil {
 		return "bad url", 500
 	}
+	fmt.Println("here2")
 	SetHeaders(bearer, request)
 	client := &http.Client{Timeout: time.Second * 150}
 
+	fmt.Println("here3")
 	return DoHttpRead(client, request)
 }
 

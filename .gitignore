@@ -6,6 +6,7 @@ web/assets/css/tail.min.css
 .DS_Store
 web/wasm
 json.wasm
+wasm/views/
 web/views/color.html
 web/views/html.html
 web/views/index.html

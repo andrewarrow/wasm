@@ -11,7 +11,11 @@
             const go = new Go();
             WebAssembly.instantiateStreaming(fetch("/assets/other/json.wasm"), go.importObject).then((result) => {
                 go.run(result.instance);
-                WasmReady();
+                async function MyFunc() {
+                  //var template = await GetTemplate();
+                  WasmReady();
+                }
+                MyFunc();
             });
         </script>
     </head>

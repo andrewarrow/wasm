@@ -1,14 +1,18 @@
 package app
 
-
-
-
-
 import (
+	"io/ioutil"
 	"net/http"
 
 	"github.com/andrewarrow/feedback/router"
 )
+
+func handleMarkupShow(c *router.Context, name string) {
+	asBytes, _ := ioutil.ReadFile("views/" + name)
+	contentType := "text/plain"
+	c.Writer.Header().Set("Content-Type", contentType)
+	c.Writer.Write(asBytes)
+}
 
 func handleMarkupShowPost(c *router.Context, guid string) {
 	c.ReadFormValuesIntoParams("file")
@@ -22,11 +26,4 @@ func handleMarkupShowPost(c *router.Context, guid string) {
 		return
 	}
 	http.Redirect(c.Writer, c.Request, returnPath, 302)
-}
-
-func handleMarkupShow(c *router.Context, guid string) {
-	item := c.One("markup", "where guid=$1", guid)
-	send := map[string]any{}
-	send["item"] = item
-	c.SendContentInLayout(".html", send, 200)
 }
