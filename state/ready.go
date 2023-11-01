@@ -1,11 +1,13 @@
 package state
 
-import "syscall/js"
-import "html/template"
-import "bytes"
-import "embed"
-import "wasm/network"
-import "fmt"
+import (
+	"bytes"
+	"embed"
+	"fmt"
+	"html/template"
+	"syscall/js"
+	"wasm/network"
+)
 
 var EmbeddedTemplates embed.FS
 

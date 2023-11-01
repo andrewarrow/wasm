@@ -3,6 +3,11 @@ node_modules
 package-lock.json
 package.json
 tail.min.css
+cmd/web/web
+cmd/web/assets
+cmd/web/views
+cmd/web/feedback.json
+cmd/wasm/views
 .DS_Store
 json.wasm
 *.html
