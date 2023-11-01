@@ -8,6 +8,7 @@ import (
 )
 
 func handleMarkupShow(c *router.Context, name string) {
+	c.Router.GetLiveOrCachedTemplate("form")
 	asBytes, _ := ioutil.ReadFile("views/" + name)
 	contentType := "text/plain"
 	c.Writer.Header().Set("Content-Type", contentType)

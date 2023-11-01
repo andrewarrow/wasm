@@ -58,7 +58,7 @@ func (e *State) Click(this js.Value, p []js.Value) any {
 }
 
 func runTemplate(name string) string {
-	templateText, _ := network.GetTemplate(name)
+	templateText := network.GetTemplate(name)
 
 	vars := map[string]any{}
 
