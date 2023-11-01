@@ -1,5 +1,6 @@
-cp views/*.html ../wasm/views
-cd ../wasm
+cp views/*.html cmd/web/views
+cp views/*.html cmd/wasm/views
+cd cmd/wasm
 GOOS=js GOARCH=wasm go build -o  ../web/assets/other/json.wasm 
 cd ../web
 # https://tailwindcss.com/blog/standalone-cli
@@ -7,4 +8,4 @@ DATABASE_URL=postgres://fred3:fred3@localhost/feedback?sslmode=disable
 tailwindcss -i assets/css/tail.components.css -o assets/css/tail.min.css --minify
 uuid=$(uuidgen); go build -ldflags="-X main.buildTag=$uuid"
 echo "3"
-./wasm run 3000
+./web run 3000
