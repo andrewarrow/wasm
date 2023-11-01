@@ -12,4 +12,5 @@ web/views/index.html
 web/views/tag.html
 web/views/title_body.html
 web/views/welcome.html
+web/views/list.html
 web/views/top.html
