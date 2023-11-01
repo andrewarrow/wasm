@@ -25,14 +25,32 @@ func (e *State) Click(this js.Value, p []js.Value) any {
 	id := this.Get("id").String()
 	fmt.Println(id)
 
+	modal := dollar("modal")
 	if id == "b1" {
-		modal := dollar("modal")
 		removeClass(modal, "translate-x-full")
 		removeClass(modal, "opacity-0")
 		modal.Set("scrollTop", 0)
+		modal.Set("innerHTML", runTemplate("form"))
 	} else if id == "b2" {
+		removeClass(modal, "translate-x-full")
+		removeClass(modal, "opacity-0")
+		modal.Set("scrollTop", 0)
+		modal.Set("innerHTML", runTemplate("other_form"))
 	}
 	return js.Undefined()
+}
+
+func runTemplate(name string) string {
+	templateText, _ := EmbeddedTemplates.ReadFile("views/" + name + ".html")
+
+	vars := map[string]any{}
+
+	t, _ := template.New("markup").Parse(string(templateText))
+	content := new(bytes.Buffer)
+	t.Execute(content, vars)
+	t.ExecuteTemplate(content, name, vars)
+	cb := content.Bytes()
+	return string(cb)
 }
 
 func (e *State) WasmReady(this js.Value, p []js.Value) any {

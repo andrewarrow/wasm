@@ -8,6 +8,7 @@ web/wasm
 json.wasm
 wasm/views/
 web/views/color.html
+web/views/*.html
 web/views/html.html
 web/views/index.html
 web/views/tag.html
