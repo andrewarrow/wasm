@@ -3,6 +3,7 @@ package state
 import "syscall/js"
 import "html/template"
 import "bytes"
+import "wasm/network"
 
 type State struct {
 }
@@ -19,10 +20,13 @@ func (e *State) WasmReady(this js.Value, p []js.Value) any {
 func (e *State) WasmReady2(this js.Value, p []js.Value) any {
 	list := js.Global().Get("document").Call("getElementById", "list")
 
-	test := `<div>hi there {{index . "test"}}</div>`
+	templateText := network.GetTemplate("list.html")
 
-	vars := map[string]any{"test": 123}
-	t, _ := template.New("markup").Parse(test)
+	list := []string{"", "", ""}
+	vars := map[string]any{}
+	vars["list"] = list
+
+	t, _ := template.New("markup").Parse(templateText)
 	content := new(bytes.Buffer)
 	t.Execute(content, vars)
 	cb := content.Bytes()
