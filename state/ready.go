@@ -32,12 +32,16 @@ func (e *State) Click(this js.Value, p []js.Value) any {
 		removeClass(modal, "translate-x-full")
 		removeClass(modal, "opacity-0")
 		modal.Set("scrollTop", 0)
-		modal.Set("innerHTML", runTemplate("form"))
+		go func() {
+			modal.Set("innerHTML", runTemplate("form"))
+		}()
 	} else if id == "b2" {
 		removeClass(modal, "translate-x-full")
 		removeClass(modal, "opacity-0")
 		modal.Set("scrollTop", 0)
-		modal.Set("innerHTML", runTemplate("other_form"))
+		go func() {
+			modal.Set("innerHTML", runTemplate("other_form"))
+		}()
 	} else if id == "cancel" {
 		addClass(modal, "translate-x-full")
 		addClass(modal, "opacity-0")
@@ -54,6 +58,19 @@ func (e *State) Click(this js.Value, p []js.Value) any {
 }
 
 func runTemplate(name string) string {
+	templateText, _ := network.GetTemplate(name)
+
+	vars := map[string]any{}
+
+	t, _ := template.New("markup").Parse(string(templateText))
+	content := new(bytes.Buffer)
+	t.Execute(content, vars)
+	t.ExecuteTemplate(content, name, vars)
+	cb := content.Bytes()
+	return string(cb)
+}
+
+func runTemplate2(name string) string {
 	templateText, _ := EmbeddedTemplates.ReadFile("views/" + name + ".html")
 
 	vars := map[string]any{}
