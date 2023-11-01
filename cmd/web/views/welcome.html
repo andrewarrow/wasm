@@ -1,0 +1,18 @@
+  <div class="p-3 text-white flex ">
+    <div class="w-3/4 mx-auto ">
+      <div class="">
+        <button id="b1" class="ml-9 border rounded bg-blue-600 text-white py-2 px-2 ">
+          this is button1
+        </button>
+        <button id="b2" class="ml-9 border rounded bg-blue-600 text-white py-2 px-2 ">
+          this is button2
+        </button>
+      </div>
+      <div id="list" class="bg-green-900 p-3 ">
+        {{ template "list" . }}
+      </div>
+    </div>
+    <div id="modal" class="opacity-0 bg-white transform translate-x-full transition-transform transition-opacity border-black border-2 fixed top-0 right-0 overflow-y-auto h-full ">
+      {{ template "form" . }}
+    </div>
+  </div>

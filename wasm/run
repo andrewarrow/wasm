@@ -1,3 +1,0 @@
-GOOS=js GOARCH=wasm go build -o  ../web/assets/other/json.wasm 
-cd ../web
-./run

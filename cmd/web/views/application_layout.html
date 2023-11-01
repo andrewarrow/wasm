@@ -1,0 +1,31 @@
+<html>  
+    <head>
+        <meta charset="utf-8"/>
+    <link href="https://fonts.bunny.net" rel="preconnect"/>
+    <link href="https://fonts.bunny.net/css?family=poppins:400,500,700,800" rel="stylesheet"/>
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,700,800" rel="stylesheet"/>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="/assets/javascript/main.js?id={{ index . "build"}}"></script>
+        <script src="/assets/javascript/wasm_exec.js"></script>
+        <script>
+            const go = new Go();
+            WebAssembly.instantiateStreaming(fetch("/assets/other/json.wasm?ran=123"), go.importObject).then((result) => {
+                go.run(result.instance);
+                async function MyFunc() {
+                  //var template = await GetTemplate();
+                  WasmReady();
+                }
+                MyFunc();
+            });
+        </script>
+    </head>
+    <body class="h-full min-h-full bg-black">
+      <div id="w" class="overflow-y-auto" style="font-family: inter;">
+         {{ index . "content" }}
+      </div>
+      <script>
+document.addEventListener("DOMContentLoaded", function() {
+});
+      </script>
+    </body>
+</html> 
