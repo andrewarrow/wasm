@@ -5,7 +5,7 @@ import "html/template"
 import "bytes"
 import "embed"
 
-//import "fmt"
+import "fmt"
 
 var EmbeddedTemplates embed.FS
 
@@ -17,12 +17,15 @@ func NewState() *State {
 	return &s
 }
 
-func (e *State) WasmReady2(this js.Value, p []js.Value) any {
+func (e *State) Click(this js.Value, p []js.Value) any {
+	fmt.Println("1i")
 	return js.Undefined()
 }
 
 func (e *State) WasmReady(this js.Value, p []js.Value) any {
 	list := js.Global().Get("document").Call("getElementById", "list")
+	b1 := js.Global().Get("document").Call("getElementById", "b1")
+	b1.Set("onclick", js.FuncOf(e.Click))
 
 	templateText, _ := EmbeddedTemplates.ReadFile("views/" + "list.html")
 
