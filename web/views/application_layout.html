@@ -11,6 +11,7 @@
             const go = new Go();
             WebAssembly.instantiateStreaming(fetch("/assets/other/json.wasm"), go.importObject).then((result) => {
                 go.run(result.instance);
+                WasmReady();
             });
         </script>
     </head>
@@ -18,5 +19,9 @@
       <div id="w" class="overflow-y-auto" style="font-family: inter;">
          {{ index . "content" }}
       </div>
+      <script>
+document.addEventListener("DOMContentLoaded", function() {
+});
+      </script>
     </body>
 </html> 

@@ -154,6 +154,4 @@ function sendFormWithWasm(wasm) {
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-});
 
