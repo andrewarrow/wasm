@@ -1,9 +1,6 @@
 package app
 
 import (
-	"html/template"
-	"wasm/markup"
-
 	"github.com/andrewarrow/feedback/router"
 )
 
@@ -36,6 +33,6 @@ func handleMarkupIndex(c *router.Context) {
 	send := map[string]any{}
 	//send["content"] = template.HTML(`<div class="p-3 border border-black"> </div>`)
 	//send["top"] = markup.ToHTML(send, "top.mu")
-	send["content"] = template.HTML(markup.ToHTML(send, "index.mu"))
+	//send["content"] = template.HTML(markup.ToHTML(send, "index.mu"))
 	c.SendContentInLayout("markup.html", send, 200)
 }
