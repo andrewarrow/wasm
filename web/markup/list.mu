@@ -1,7 +1,10 @@
 {{ define "list" }}
-  div p-3
+  {{ $list := index . "list" }}
+  {{ range $i, $item := $list }}
+  div p-3 bg-gray-900 flex space-x-3
     div
-      1
+      input type=checkbox id=a{{$i}}
     div
-      2
+      item {{$i}}
+  {{ end }}
   {{ end }}

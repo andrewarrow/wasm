@@ -13,6 +13,10 @@ func NewState() *State {
 }
 
 func (e *State) WasmReady(this js.Value, p []js.Value) any {
+	return js.Undefined()
+}
+
+func (e *State) WasmReady2(this js.Value, p []js.Value) any {
 	list := js.Global().Get("document").Call("getElementById", "list")
 
 	test := `<div>hi there {{index . "test"}}</div>`

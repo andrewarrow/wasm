@@ -29,5 +29,7 @@ func HandleWelcome(c *router.Context, second, third string) {
 
 func handleWelcomeIndex(c *router.Context) {
 	send := map[string]any{}
+	list := []string{"", "", ""}
+	send["list"] = list
 	c.SendContentInLayout("welcome.html", send, 200)
 }
