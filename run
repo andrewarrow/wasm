@@ -1,4 +1,6 @@
 cp views/*.html cmd/web/views
+cp -R assets cmd/web
+cp app/feedback.json cmd/web
 cp views/*.html cmd/wasm/views
 cd cmd/wasm
 GOOS=js GOARCH=wasm go build -o  ../web/assets/other/json.wasm 
