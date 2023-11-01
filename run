@@ -5,6 +5,7 @@ cp views/*.html cmd/wasm/views
 cd cmd/wasm
 GOOS=js GOARCH=wasm go build -o  ../web/assets/other/json.wasm 
 cd ../web
+ln -s ../../markup markup
 # https://tailwindcss.com/blog/standalone-cli
 DATABASE_URL=postgres://fred3:fred3@localhost/feedback?sslmode=disable
 tailwindcss -i assets/css/tail.components.css -o assets/css/tail.min.css --minify

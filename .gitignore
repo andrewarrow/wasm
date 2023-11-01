@@ -3,6 +3,7 @@ node_modules
 package-lock.json
 package.json
 tail.min.css
+cmd/web/markup
 cmd/web/feedback.json
 cmd/web/web
 cmd/web/assets
