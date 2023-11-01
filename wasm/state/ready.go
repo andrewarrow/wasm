@@ -5,7 +5,7 @@ import "html/template"
 import "bytes"
 import "embed"
 
-//import "fmt"
+import "fmt"
 
 var EmbeddedTemplates embed.FS
 
@@ -24,13 +24,15 @@ func (e *State) WasmReady2(this js.Value, p []js.Value) any {
 func (e *State) WasmReady(this js.Value, p []js.Value) any {
 	list := js.Global().Get("document").Call("getElementById", "list")
 
-	templateText, _ := EmbeddedTemplates.ReadFile("views/" + "list.html")
+	templateText, err := EmbeddedTemplates.ReadFile("views/" + "list.html")
+	fmt.Println(err, string(templateText))
 
 	listItems := []string{"", "", "", ""}
 	vars := map[string]any{}
 	vars["list"] = listItems
 
-	t, _ := template.New("markup").Parse(string(templateText))
+	t, err := template.New("markup").Parse(string(templateText))
+	fmt.Println(err, t)
 	content := new(bytes.Buffer)
 	t.Execute(content, vars)
 	cb := content.Bytes()

@@ -9,7 +9,7 @@
         <script src="/assets/javascript/wasm_exec.js"></script>
         <script>
             const go = new Go();
-            WebAssembly.instantiateStreaming(fetch("/assets/other/json.wasm"), go.importObject).then((result) => {
+            WebAssembly.instantiateStreaming(fetch("/assets/other/json.wasm?ran=123"), go.importObject).then((result) => {
                 go.run(result.instance);
                 async function MyFunc() {
                   //var template = await GetTemplate();
