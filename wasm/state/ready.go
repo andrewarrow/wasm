@@ -18,14 +18,17 @@ func NewState() *State {
 }
 
 func (e *State) Click(this js.Value, p []js.Value) any {
-	fmt.Println("1i")
+	id := this.Get("id").String()
+	fmt.Println(id)
 	return js.Undefined()
 }
 
 func (e *State) WasmReady(this js.Value, p []js.Value) any {
 	list := js.Global().Get("document").Call("getElementById", "list")
 	b1 := js.Global().Get("document").Call("getElementById", "b1")
+	b2 := js.Global().Get("document").Call("getElementById", "b2")
 	b1.Set("onclick", js.FuncOf(e.Click))
+	b2.Set("onclick", js.FuncOf(e.Click))
 
 	templateText, _ := EmbeddedTemplates.ReadFile("views/" + "list.html")
 
